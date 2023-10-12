@@ -4,7 +4,7 @@
     <div class="sparkline">
         {{ sparkline(urlSparklineConversions) }}
 	    <div class="sparkline-metrics">
-            <strong>{{ nb_conversions|number }}</strong>
+            <strong>{{ nb_conversions }}</strong>
             {{ 'General_EcommerceOrders'|translate }}
             <img src='plugins/Morpheus/images/ecommerceOrder.png'>
             ({{ 'General_NVisits'|translate("<strong>"~nb_visits_converted~"</strong>")|raw }})
@@ -62,7 +62,7 @@
         {{ sparkline(urlSparklineConversionRate) }}
         <div class="sparkline-metrics">
             {% set ecommerceOrdersText %}{{ 'General_EcommerceOrders'|translate }}{% endset %}
-            {{ 'Goals_ConversionRate'|translate("<strong>"~conversion_rate|percent~"</strong> "~ecommerceOrdersText)|raw }}
+            {{ 'Goals_ConversionRate'|translate("<strong>"~conversion_rate~"</strong> "~ecommerceOrdersText)|raw }}
         </div>
         {% if conversion_rate_trend is defined %}
         <div class="metricEvolution" title="{{ conversion_rate_tooltip|raw }}">
@@ -78,7 +78,7 @@
     <div class="sparkline">
         {{ sparkline(urlSparklinePurchasedProducts) }}
 	    <div class="sparkline-metrics">
-            <strong>{{ items|number }}</strong> {{ 'General_PurchasedProducts'|translate }}
+            <strong>{{ items }}</strong> {{ 'General_PurchasedProducts'|translate }}
         </div>
         {% if items_trend is defined %}
         <div class="metricEvolution" title="{{ items_tooltip|raw }}">
@@ -102,7 +102,7 @@
         {{ sparkline(cart_urlSparklineConversions) }}
 	    <div class="sparkline-metrics">
             {% set ecommerceAbandonedCartsText %}{{ 'Goals_AbandonedCart'|translate }}{% endset %}
-            <strong>{{ cart_nb_conversions|number }}</strong> {{ 'General_VisitsWith'|translate(ecommerceAbandonedCartsText) }}
+            <strong>{{ cart_nb_conversions }}</strong> {{ 'General_VisitsWith'|translate(ecommerceAbandonedCartsText) }}
 	    </div>
         {% if cart_nb_conversions_trend is defined %}
         <div class="metricEvolution" title="{{ cart_nb_conversions_tooltip|raw }}">
@@ -136,7 +136,7 @@
     <div class="sparkline">
         {{ sparkline(cart_urlSparklineConversionRate) }}
 	    <div class="sparkline-metrics">
-            <strong>{{ cart_conversion_rate|percent }}</strong>
+            <strong>{{ cart_conversion_rate }}</strong>
             {{ 'General_VisitsWith'|translate(ecommerceAbandonedCartsText) }}
 	    </div>
         {% if cart_conversion_rate_trend is defined %}
