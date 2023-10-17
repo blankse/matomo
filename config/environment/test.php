@@ -49,10 +49,11 @@ return array(
     }),
 
     'Piwik\Config' => \Piwik\DI::decorate(function ($previous, Container $c) {
-        $testingEnvironment = $c->get('Piwik\Tests\Framework\TestingEnvironmentVariables');
+        $previous->General['piwik_professional_support_ads_enabled'] = '0';
 
         $dontUseTestConfig = $c->get('test.vars.dontUseTestConfig');
         if (!$dontUseTestConfig) {
+            $testingEnvironment = $c->get('Piwik\Tests\Framework\TestingEnvironmentVariables');
             $settingsProvider = $c->get('Piwik\Application\Kernel\GlobalSettingsProvider');
             return new TestConfig($settingsProvider, $testingEnvironment, $allowSave = false, $doSetTestEnvironment = true);
         } else {
