@@ -9,8 +9,10 @@
 namespace Piwik\Plugins\ProfessionalServices;
 
 use Piwik\Common;
+use Piwik\Container\StaticContainer;
 use Piwik\View;
 use Piwik\Plugin;
+use Piwik\Widget\WidgetsList;
 
 class ProfessionalServices extends \Piwik\Plugin
 {
@@ -33,6 +35,7 @@ class ProfessionalServices extends \Piwik\Plugin
             'Template.afterVisitorProfileOverview' => 'getSessionRecordingPromo',
             'Template.afterPagePerformanceReport' => 'getSeoWebVitalsPromo',
             'Template.afterSearchEngines' => 'getSeoWebVitalsPromo',
+            'Widget.filterWidgets' => 'filterWidgets',
         );
     }
 
@@ -148,6 +151,15 @@ class ProfessionalServices extends \Piwik\Plugin
         if ($this->shouldShowPromoForPlugin('SEOWebVitals')) {
             $view = new View('@ProfessionalServices/promoSEOWebVitals');
             $out .= $view->render();
+        }
+    }
+
+    public function filterWidgets(WidgetsList $list)
+    {
+        $promoWidgetApplicable = StaticContainer::get('Piwik\Plugins\ProfessionalServices\PromoWidgetApplicable');
+
+        if (!$promoWidgetApplicable->check($this->getPluginName())) {
+            $list->remove('ProfessionalServices_Promo*');
         }
     }
 
